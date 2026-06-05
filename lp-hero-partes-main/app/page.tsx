@@ -1,4 +1,3 @@
-"use server";
 import { Hero } from "./components/hero";
 import { Differentials } from "./components/differencials";
 import { About } from "./components/about";

@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Poppins, Inter } from "next/font/google";
-import Script from "next/script";
 import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 
 const poppins = Poppins({
@@ -28,6 +27,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://site-heropartes.vercel.app"),
   title: "Hero Partes | Peças Automotivas no Atacado - Guarulhos/SP",
   description: "Hero Partes é especialista em peças automotivas, atendendo oficinas, lojistas e motoristas em todo o Brasil. Com anos de experiência no mercado, oferecemos peças de alta qualidade com preços justo.",
 
