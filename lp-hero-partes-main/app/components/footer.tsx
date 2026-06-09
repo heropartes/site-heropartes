@@ -80,6 +80,8 @@ export function Footer() {
                   }
                 }
                 href="https://www.mercadolivre.com.br/loja/hero-partes"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex h-12 w-12 items-center justify-center rounded-lg bg-brand-yellow text-xl"
               >
                 <img src="/mercado-livre.svg" alt="logo Mercado Livre" className="w-8" /> 

@@ -16,7 +16,10 @@ export function Header() {
         </a>
         <nav className="hidden items-center gap-7 text-sm font-medium text-white md:flex">
           {links.map((l) => (
-            <a key={l.label} href={l.href} className="transition-colors hover:text-brand-yellow"
+            <a key={l.label} href={l.href}
+            target={l.href.startsWith("http") ? "_blank" : undefined}
+            rel={l.href.startsWith("http") ? "noopener noreferrer" : undefined}
+            className="transition-colors hover:text-brand-yellow"
             onClick={() => {
               window.gtag?.("event", "click_revendedor", {
                 event_category: "resselert_header_link",

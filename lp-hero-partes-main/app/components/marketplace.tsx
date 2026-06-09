@@ -35,6 +35,8 @@ export function Marketplaces() {
                 }
               }
               href="https://www.mercadolivre.com.br/loja/hero-partes"
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center gap-2 rounded-lg bg-brand-green-deep px-5 py-3 text-sm font-semibold text-white shadow-lg transition-transform hover:-translate-y-0.5"
             >
               <img src="/mercado-livre.svg" alt="logo Mercado Livre" className="w-20" />
