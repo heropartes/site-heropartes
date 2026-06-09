@@ -68,15 +68,13 @@ export function Hero() {
           <Button
             size="lg"
             variant="outline"
-            onClick={() => 
-            {window.gtag?.("event", "click_mktplace_modal", {
-              event_category: "btn_open_mktplace_modal",
-              event_label: "User clicked on -Compre nos maiores mktplaces- button in hero section",
-            });
-            setOpen(true)
-            }
-          }
-
+            onClick={() => {
+              window.gtag?.("event", "click_mktplace_modal", {
+                event_category: "btn_open_mktplace_modal",
+                event_label: "User clicked on -Compre nos maiores mktplaces- button in hero section",
+              });
+              document.getElementById("comprar")?.scrollIntoView({ behavior: "smooth" });
+            }}
             className="border-brand-yellow bg-brand-green/40 text-white backdrop-blur hover:bg-brand-green/60 cursor-pointer"
           >
             Compre nos maiores Marketplaces
