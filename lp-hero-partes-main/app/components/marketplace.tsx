@@ -34,7 +34,7 @@ export function Marketplaces() {
                   });
                 }
               }
-              href="https://lista.mercadolivre.com.br/_CustId_1191098646"
+              href="https://www.mercadolivre.com.br/loja/hero-partes"
               className="flex items-center gap-2 rounded-lg bg-brand-green-deep px-5 py-3 text-sm font-semibold text-white shadow-lg transition-transform hover:-translate-y-0.5"
             >
               <img src="/mercado-livre.svg" alt="logo Mercado Livre" className="w-20" />

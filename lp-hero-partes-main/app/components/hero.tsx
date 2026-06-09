@@ -10,7 +10,7 @@ export function Hero() {
     {
       name: "Mercado Livre",
       image: "/mercado-livre.svg",
-      link: "https://lista.mercadolivre.com.br/_CustId_1191098646",
+      link: "https://www.mercadolivre.com.br/loja/hero-partes",
     },
     {
       name: "Shopee",
