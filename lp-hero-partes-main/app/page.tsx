@@ -7,6 +7,7 @@ import { Reseller } from "./components/reseller";
 import { Marketplaces } from "./components/marketplace";
 import { Contact } from "./components/contact";
 import { Footer } from "./components/footer";
+import { WhatsAppButton } from "./components/whatsapp-button";
 
 export default async function Home() {
 
@@ -21,6 +22,7 @@ export default async function Home() {
       <Marketplaces />
       <Contact />
       <Footer />
+      <WhatsAppButton />
     </main>
   );
 }
