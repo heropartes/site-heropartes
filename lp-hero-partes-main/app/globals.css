@@ -171,6 +171,15 @@
 .bg-yellow-gradient { background: var(--yellow-gradient); }
 .shadow-card-soft { box-shadow: var(--shadow-card); }
 
+@keyframes ping-slow {
+  0%   { transform: scale(1); opacity: 0.4; }
+  10%  { transform: scale(2); opacity: 0; }
+  100% { transform: scale(1); opacity: 0; }
+}
+.animate-ping-slow {
+  animation: ping-slow 10s ease-out infinite;
+}
+
 .checker-pattern {
   background-image:
     linear-gradient(45deg, oklch(0.78 0.17 75 / 0.15) 25%, transparent 25%),
