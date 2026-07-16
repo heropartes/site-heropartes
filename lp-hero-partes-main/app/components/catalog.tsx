@@ -1,14 +1,14 @@
 "use client";
 import { ExternalLink } from "lucide-react";
 import { Button } from "./button";
-import { Car, Cog, Compass, Zap } from "lucide-react";
+import { Zap, Cog, Ruler, Wrench } from "lucide-react";
 
 export function Catalog() {
   const cats = [
-    { icon: Cog, label: "Motor e Transmissão", href: "https://portal.heropartes.com.br/" },
-    { icon: Compass, label: "Suspensão e Direção", href: "https://portal.heropartes.com.br/" },
-    { icon: Zap, label: "Parte Elétrica", href: "https://portal.heropartes.com.br/" },
-    { icon: Car, label: "Carroceria e Acabamento", href: "https://portal.heropartes.com.br/" },
+    { icon: Zap, label: "Coxins do Motor", href: "https://portal.heropartes.com.br/" },
+    { icon: Cog, label: "Coxins de Câmbio", href: "https://portal.heropartes.com.br/" },
+    { icon: Ruler, label: "Braços, Buchas e Bandejas", href: "https://portal.heropartes.com.br/" },
+    { icon: Wrench, label: "Ferramentas", href: "https://portal.heropartes.com.br/" },
   ];
   
   return (
