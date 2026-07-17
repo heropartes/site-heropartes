@@ -8,6 +8,8 @@ const AUTOPLAY_MS = 6_000;
 const PAUSE_MS = 60_000;
 const ANIM_MS = 300;
 
+type SlideButton = "catalog" | "marketplace";
+
 const slides = [
   {
     id: "slide1",
@@ -24,7 +26,7 @@ const slides = [
       </>
     ),
     subtitle: <p>Conheça nossa linha original importada, produzida pela mesma fabricante responsável pelos originais de montadora.</p>,
-    buttons: ["catalog", "marketplace"] as const,
+    buttons: ["catalog", "marketplace"] as SlideButton[],
   },
   {
     id: "slide3",
@@ -44,7 +46,7 @@ const slides = [
         <p className="mt-3">Atendimento humanizado, linha premium e fornecimento ágil para parceiros.</p>
       </>
     ),
-    buttons: ["catalog"] as const,
+    buttons: ["catalog"] as SlideButton[],
   },
   {
     id: "slide2",
@@ -59,7 +61,7 @@ const slides = [
       </>
     ),
     subtitle: <p>Qualidade original para seu veículo. Parceiros que garantem confiança, desempenho e pronta entrega.</p>,
-    buttons: ["marketplace"] as const,
+    buttons: ["marketplace"] as SlideButton[],
   },
 ];
 
