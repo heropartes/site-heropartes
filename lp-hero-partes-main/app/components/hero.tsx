@@ -147,6 +147,9 @@ export function Hero() {
       {/* Gradiente escuro — apenas no slide 1 */}
       <div className={`absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent transition-opacity duration-700 ${current === 0 ? "opacity-100" : "opacity-0"}`} />
 
+      {/* Overlay escuro no topo — apenas no slide 2 (fundo amarelo) */}
+      <div className={`absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-black/20 to-transparent transition-opacity duration-700 z-[5] ${current === 1 ? "opacity-100" : "opacity-0"}`} />
+
       {/* Seta esquerda */}
       <button
         onClick={prev}
@@ -173,11 +176,17 @@ export function Hero() {
       >
         {/* Texto específico de cada slide — min-h garante que o botão fique sempre na mesma altura */}
         <div className="min-h-[190px] md:min-h-[270px]">
-          <h1 className="max-w-2xl font-display text-4xl font-extrabold leading-[1.05] text-white md:text-6xl">
+          <h1
+            className="max-w-2xl font-display text-4xl font-extrabold leading-[1.05] text-white md:text-6xl"
+            style={current === 1 || current === 2 ? { textShadow: "2px 2px 8px rgba(0,0,0,0.85)" } : undefined}
+          >
             {slide.title}
           </h1>
           {slide.subtitle && (
-            <div className="mt-6 max-w-xl text-base text-white/85 md:text-lg">
+            <div
+              className="mt-6 max-w-xl text-base text-white/85 md:text-lg"
+              style={current === 1 || current === 2 ? { textShadow: "1px 1px 6px rgba(0,0,0,0.85)" } : undefined}
+            >
               {slide.subtitle}
             </div>
           )}
@@ -196,6 +205,7 @@ export function Hero() {
                 window.open("https://portal.heropartes.com.br/", "_blank");
               }}
               className="bg-brand-yellow text-brand-green-deep hover:bg-brand-yellow-soft font-semibold shadow-card-soft cursor-pointer"
+              style={current === 1 || current === 2 ? { boxShadow: "0 4px 14px rgba(0,0,0,0.5)" } : undefined}
             >
               Acesse nosso Catálogo Online
             </Button>
@@ -212,6 +222,7 @@ export function Hero() {
                 document.getElementById("comprar")?.scrollIntoView({ behavior: "smooth" });
               }}
               className="border-brand-yellow bg-brand-green/40 text-white backdrop-blur hover:bg-brand-green/60 cursor-pointer"
+              style={current === 1 || current === 2 ? { boxShadow: "0 4px 14px rgba(0,0,0,0.5)" } : undefined}
             >
               Compre nos maiores Marketplaces
             </Button>
