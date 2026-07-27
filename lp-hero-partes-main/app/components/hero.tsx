@@ -6,7 +6,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const AUTOPLAY_MS = 6_000;
 const PAUSE_MS = 60_000;
-const ANIM_MS = 300;
+const ANIM_MS = 800;
 
 type SlideButton = "catalog" | "marketplace";
 
@@ -37,7 +37,7 @@ const slides = [
       <>
         Autopeças Importadas para
         <br />
-        <span className="text-brand-yellow">veículos Premium</span>
+        <span style={{ color: "#072916", textShadow: "none" }}>veículos Premium</span>
       </>
     ),
     subtitle: (
@@ -65,47 +65,62 @@ const slides = [
   },
 ];
 
+// Track com clones para loop infinito: [clone_último, slide0, slide1, slide2, clone_primeiro]
+const track = [slides[slides.length - 1], ...slides, slides[0]];
+const REAL_START = 1;
+
 export function Hero() {
-  const [current, setCurrent] = useState(0);
+  const [vIdx, setVIdx] = useState(REAL_START);
+  const [animated, setAnimated] = useState(true);
   const [fading, setFading] = useState(false);
   const busy = useRef(false);
-  const currentRef = useRef(0);
+  const vIdxRef = useRef(REAL_START);
   const autoplayTimer = useRef<ReturnType<typeof setInterval> | null>(null);
   const resumeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const startAutoplayRef = useRef<() => void>(() => {});
 
-  const startAutoplay = useCallback(() => {
-    if (autoplayTimer.current) clearInterval(autoplayTimer.current);
-    autoplayTimer.current = setInterval(() => {
-      if (busy.current) return;
-      busy.current = true;
-      setFading(true);
-      setTimeout(() => {
-        const next = (currentRef.current + 1) % slides.length;
-        currentRef.current = next;
-        setCurrent(next);
-        setFading(false);
-        busy.current = false;
-      }, ANIM_MS);
-    }, AUTOPLAY_MS);
+  const current = (vIdx - REAL_START + slides.length) % slides.length;
+
+  const snapTo = useCallback((idx: number) => {
+    setAnimated(false);
+    vIdxRef.current = idx;
+    setVIdx(idx);
+    requestAnimationFrame(() => requestAnimationFrame(() => setAnimated(true)));
   }, []);
 
-  const goTo = useCallback((next: number, fromUser = false) => {
-    if (busy.current || next === currentRef.current) return;
+  const go = useCallback((nextVIdx: number, fromUser = false) => {
+    if (busy.current) return;
     busy.current = true;
     setFading(true);
+    setAnimated(true);
+    vIdxRef.current = nextVIdx;
+    setVIdx(nextVIdx);
+
     setTimeout(() => {
-      currentRef.current = next;
-      setCurrent(next);
       setFading(false);
       busy.current = false;
+      if (nextVIdx >= track.length - 1) snapTo(REAL_START);
+      else if (nextVIdx <= 0) snapTo(REAL_START + slides.length - 1);
     }, ANIM_MS);
 
     if (fromUser) {
       if (autoplayTimer.current) clearInterval(autoplayTimer.current);
       if (resumeTimer.current) clearTimeout(resumeTimer.current);
-      resumeTimer.current = setTimeout(startAutoplay, PAUSE_MS);
+      resumeTimer.current = setTimeout(() => startAutoplayRef.current(), PAUSE_MS);
     }
-  }, [startAutoplay]);
+  }, [snapTo]);
+
+  const startAutoplay = useCallback(() => {
+    if (autoplayTimer.current) clearInterval(autoplayTimer.current);
+    autoplayTimer.current = setInterval(() => {
+      if (busy.current) return;
+      go(vIdxRef.current + 1);
+    }, AUTOPLAY_MS);
+  }, [go]);
+
+  useEffect(() => {
+    startAutoplayRef.current = startAutoplay;
+  });
 
   useEffect(() => {
     startAutoplay();
@@ -115,34 +130,38 @@ export function Hero() {
     };
   }, [startAutoplay]);
 
-  function prev() {
-    const next = currentRef.current === 0 ? slides.length - 1 : currentRef.current - 1;
-    goTo(next, true);
-  }
-
-  function next() {
-    const next = currentRef.current === slides.length - 1 ? 0 : currentRef.current + 1;
-    goTo(next, true);
-  }
+  function prev() { go(vIdxRef.current - 1, true); }
+  function next() { go(vIdxRef.current + 1, true); }
 
   const slide = slides[current];
 
   return (
     <section className="relative min-h-[680px] w-full overflow-hidden">
 
-      {/* Imagens de fundo — crossfade */}
-      {slides.map((s, i) => (
-        <img
-          key={s.id}
-          src={s.image}
-          alt={s.alt}
-          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
-            i === current ? "opacity-100" : "opacity-0"
-          }`}
-          style={{ objectPosition: s.objectPosition }}
-        />
-      ))}
-
+      {/* Slide track — loop infinito com clones */}
+      <div
+        className="absolute inset-0 flex"
+        style={{
+          width: `${track.length * 100}%`,
+          transform: `translateX(-${(vIdx / track.length) * 100}%)`,
+          transition: animated ? `transform ${ANIM_MS}ms ease-in-out` : "none",
+        }}
+      >
+        {track.map((s, i) => (
+          <div
+            key={`${s.id}-${i}`}
+            className="relative h-full flex-shrink-0 overflow-hidden"
+            style={{ width: `${100 / track.length}%` }}
+          >
+            <img
+              src={s.image}
+              alt={s.alt}
+              className="h-full w-full object-cover"
+              style={{ objectPosition: s.objectPosition }}
+            />
+          </div>
+        ))}
+      </div>
 
       {/* Gradiente escuro — apenas no slide 1 */}
       <div className={`absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent transition-opacity duration-700 ${current === 0 ? "opacity-100" : "opacity-0"}`} />
@@ -174,7 +193,6 @@ export function Hero() {
           fading ? "opacity-0" : "opacity-100"
         }`}
       >
-        {/* Texto específico de cada slide — min-h garante que o botão fique sempre na mesma altura */}
         <div className="min-h-[190px] md:min-h-[270px]">
           <h1
             className="max-w-2xl font-display text-4xl font-extrabold leading-[1.05] text-white md:text-6xl"
@@ -192,7 +210,6 @@ export function Hero() {
           )}
         </div>
 
-        {/* Botões — sempre na mesma altura */}
         <div className="mt-8 flex flex-wrap gap-4">
           {slide.buttons.includes("catalog") && (
             <Button
@@ -235,7 +252,7 @@ export function Hero() {
         {slides.map((s, i) => (
           <button
             key={s.id}
-            onClick={() => goTo(i, true)}
+            onClick={() => go(REAL_START + i, true)}
             aria-label={`Ir para slide ${i + 1}`}
             className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
               i === current ? "w-6 bg-white" : "w-2 bg-white/50 hover:bg-white/80"
