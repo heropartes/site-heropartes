@@ -1,8 +1,25 @@
 "use client";
 
+import { useEffect } from "react";
 import { ShieldCheck } from "lucide-react";
 import { Truck } from "lucide-react";
 import { ThumbsUp } from "lucide-react";
+
+function RASeal() {
+  useEffect(() => {
+    if (document.getElementById("ra-embed-verified-seal")) return;
+    const script = document.createElement("script");
+    script.type = "text/javascript";
+    script.id = "ra-embed-verified-seal";
+    script.src = "https://s3.amazonaws.com/raichu-beta/ra-verified/bundle.js";
+    script.setAttribute("data-id", "Y2RRYlZwRzVLM3FoUmRKVjpoZXJvLXBhcnRlcy1zb2x1Y29lcy1lbXByZWVuZGVkb3Jhcy1sdGRh");
+    script.setAttribute("data-target", "ra-verified-seal");
+    script.setAttribute("data-model", "compact_1");
+    document.getElementById("ra-verified-seal")?.appendChild(script);
+  }, []);
+
+  return <div id="ra-verified-seal" />;
+}
 
 export function Footer() {
   const features = [
@@ -69,7 +86,7 @@ export function Footer() {
               Adquira <span className="text-brand-yellow">peças</span> <br />
               para o seu veículo
             </p>
-            <div className="mt-3 flex gap-3">
+            <div className="mt-3 flex flex-wrap items-center gap-3">
               <a
                 onClick={
                   () => {
@@ -105,6 +122,7 @@ export function Footer() {
               </a>
             </div>
           </div>
+          <RASeal />
         </div>
       </div>
       <div className="relative border-t border-white/10 py-5 text-center text-xs text-white/60">
