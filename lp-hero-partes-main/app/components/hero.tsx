@@ -31,6 +31,7 @@ const slides = [
   {
     id: "slide3",
     image: "/slide3.jpg",
+    mobileImage: "/slide3-mobile.jpg",
     alt: "Hero Partes - Autopeças Importadas Premium",
     objectPosition: "top",
     title: (
@@ -51,6 +52,7 @@ const slides = [
   {
     id: "slide2",
     image: "/slide2.jpg",
+    mobileImage: "/slide2-mobile.jpg",
     alt: "Marcas que trabalhamos - Hero Partes",
     objectPosition: "top",
     title: (
@@ -153,12 +155,17 @@ export function Hero() {
             className="relative h-full flex-shrink-0 overflow-hidden"
             style={{ width: `${100 / track.length}%` }}
           >
-            <img
-              src={s.image}
-              alt={s.alt}
-              className="h-full w-full object-cover"
-              style={{ objectPosition: s.objectPosition }}
-            />
+            <picture className="h-full w-full">
+              {s.mobileImage && (
+                <source media="(max-width: 767px)" srcSet={s.mobileImage} />
+              )}
+              <img
+                src={s.image}
+                alt={s.alt}
+                className="h-full w-full object-cover"
+                style={{ objectPosition: s.objectPosition }}
+              />
+            </picture>
           </div>
         ))}
       </div>
