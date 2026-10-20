@@ -3,7 +3,7 @@ export function Header() {
 
   const links = [
     { label: "Seja um Revendedor Hero", href: "https://portal.heropartes.com.br/" },
-    { label: "Comprar agora", href: "#comprar" },
+    { label: "Comprar Agora", href: "#comprar" },
     { label: "Nossa História", href: "#sobre" },
     { label: "Produtos", href: "#produtos" },
     { label: "Contato", href: "#contato" },
@@ -32,6 +32,20 @@ export function Header() {
             </a>
           ))}
         </nav>
+        <a
+          href="https://catalogo.heropartes.net/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="rounded-lg bg-brand-yellow px-4 py-2 text-sm font-semibold text-brand-green-deep shadow-[0_4px_14px_rgba(0,0,0,0.35)] transition-colors hover:bg-brand-yellow-soft"
+          onClick={() => {
+            window.gtag?.("event", "click_catalog", {
+              event_category: "btn_catalog_header",
+              event_label: "User clicked on -Catálogo Online- header button",
+            });
+          }}
+        >
+          Catálogo Online
+        </a>
       </div>
     </header>
   );
