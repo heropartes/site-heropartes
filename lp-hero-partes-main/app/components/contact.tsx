@@ -9,7 +9,7 @@ import { Button } from "./button";
 export function Contact() {
   const items = [
     { icon: Phone, label: "Telefone", value: "(11) 93096-0160", href: "https://api.whatsapp.com/send/?phone=5511930960160&text=Ol%C3%A1%21+Gostaria+de+informa%C3%A7%C3%B5es+sobre+um+produto.&type=phone_number&app_absent=0"},
-    { icon: Mail, label: "E-mail", value: "contato@heropartes.com.br", href: "mailto:contato@heropartes.com.br" },
+    { icon: Mail, label: "E-mail", value: "suporte2@heropartes.com.br", href: "mailto:suporte2@heropartes.com.br" },
     { icon: MapPin, label: "Endereço", value: "Guarulhos / São Paulo - SP" },
   ];
   return (

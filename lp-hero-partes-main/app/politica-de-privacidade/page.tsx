@@ -167,7 +167,7 @@ const sections = [
         Pela LGPD, você pode pedir a confirmação de que tratamos seus dados, acesso, correção, anonimização,
         eliminação, informações sobre compartilhamento e a revogação do consentimento. Para isso, escreva
         para{" "}
-        <a href="mailto:contato@heropartes.com.br">contato@heropartes.com.br</a>. Você também pode
+        <a href="mailto:suporte2@heropartes.com.br">suporte2@heropartes.com.br</a>. Você também pode
         apresentar reclamação à Autoridade Nacional de Proteção de Dados (ANPD).
       </p>
     ),

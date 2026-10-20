@@ -81,8 +81,8 @@ export function Footer() {
           <p className="mt-6 font-bold text-brand-yellow">Entre em contato</p>
           <p className="mt-2">(11) 93096-0160</p>
           <p>
-            <a href="mailto:contato@heropartes.com.br" className="transition-colors hover:text-brand-yellow">
-              contato@heropartes.com.br
+            <a href="mailto:suporte2@heropartes.com.br" className="transition-colors hover:text-brand-yellow">
+              suporte2@heropartes.com.br
             </a>
           </p>
           <p>Seg à Qui - 7h30 às 17h30</p>
