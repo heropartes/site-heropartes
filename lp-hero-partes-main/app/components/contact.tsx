@@ -52,7 +52,7 @@ export function Contact() {
               event_category: "btn_catalog_contact",
               event_label: "User clicked on -Acesse nosso Catálogo- button in contact section",
             });
-            window.open("https://portal.heropartes.com.br/", "_blank");
+            window.open("https://catalogo.heropartes.net/", "_blank");
           }}
           className="mt-10 bg-brand-yellow text-brand-green-deep hover:bg-brand-yellow-soft font-semibold"
         >
