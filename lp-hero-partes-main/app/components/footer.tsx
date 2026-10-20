@@ -4,6 +4,8 @@ import { useEffect } from "react";
 import { ShieldCheck } from "lucide-react";
 import { Truck } from "lucide-react";
 import { ThumbsUp } from "lucide-react";
+import Link from "next/link";
+import { openCookiePreferences } from "./cookie-consent";
 
 function RASeal() {
   useEffect(() => {
@@ -58,21 +60,33 @@ export function Footer() {
           ))}
         </div>
         <div className="text-sm text-white/85">
-          <p className="font-bold text-brand-yellow">AJUDA</p>
+          <p className="font-bold text-brand-yellow">Institucional</p>
           <ul className="mt-3 space-y-2">
-            <li>Central de Atendimento</li>
-            <li>Trocas e Devoluções</li>
-            <li>Prazos e Entregas</li>
-            <li>Segurança</li>
-          </ul>
-          <p className="mt-6 font-bold text-brand-yellow">INSTITUCIONAL</p>
-          <ul className="mt-3 space-y-2">
-            <li>Quem Somos</li>
-            <li>Política de Privacidade</li>
+            <li>
+              <Link href="/#sobre" className="transition-colors hover:text-brand-yellow">
+                Quem Somos
+              </Link>
+            </li>
+            <li>
+              <Link href="/politica-de-privacidade" className="transition-colors hover:text-brand-yellow">
+                Política de Privacidade
+              </Link>
+            </li>
+            <li>
+              <button type="button" onClick={openCookiePreferences} className="cursor-pointer transition-colors hover:text-brand-yellow">
+                Preferências de cookies
+              </button>
+            </li>
           </ul>
           <p className="mt-6 font-bold text-brand-yellow">Entre em contato</p>
           <p className="mt-2">(11) 93096-0160</p>
-          <p>Seg à Sex - 9h às 18h</p>
+          <p>
+            <a href="mailto:contato@heropartes.com.br" className="transition-colors hover:text-brand-yellow">
+              contato@heropartes.com.br
+            </a>
+          </p>
+          <p>Seg à Qui - 7h30 às 17h30</p>
+          <p>Sex - 7h30 às 16h30</p>
         </div>
         <div className="space-y-6">
           <div>

@@ -186,7 +186,7 @@ export function About() {
                 <div className="relative h-72 md:h-80 overflow-hidden rounded-lg bg-white/5 ring-1 ring-white/10">
                   <iframe
                     className="h-full w-full"
-                    src="https://www.youtube.com/embed/1VT5gwmzB_Q?si=9Ph1iosm9yBmlBBS"
+                    src="https://www.youtube-nocookie.com/embed/1VT5gwmzB_Q"
                     title="Vídeo institucional Hero Partes"
                     allow="autoplay; encrypted-media"
                     allowFullScreen
