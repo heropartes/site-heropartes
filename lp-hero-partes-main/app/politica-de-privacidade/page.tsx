@@ -8,17 +8,26 @@ export const metadata: Metadata = {
   description: "Como a Hero Partes trata os dados de quem visita o site, em conformidade com a LGPD.",
 };
 
-const UPDATED_AT = "20 de outubro de 2026";
+// Ao mudar o que é coletado ou com quem é compartilhado, trocar também
+// CONSENT_VERSION em components/cookie-consent.tsx.
+const UPDATED_AT = "3 de novembro de 2026";
 
 const sections = [
   {
     title: "1. Quem somos",
     body: (
-      <p>
-        Este site é mantido pela <strong>Hero Partes Soluções Empreendedoras Ltda.</strong>, com sede em
-        Guarulhos/SP, que é a controladora dos dados pessoais tratados aqui, nos termos da Lei Geral de
-        Proteção de Dados Pessoais (Lei nº 13.709/2018 — LGPD).
-      </p>
+      <>
+        <p>
+          Este site é mantido pela <strong>Hero Partes Soluções Empreendedoras Ltda.</strong>, inscrita no
+          CNPJ sob o nº 45.776.153/0001-63, que é a controladora dos dados pessoais tratados aqui, nos
+          termos da Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018 — LGPD).
+        </p>
+        <p>
+          Endereço: Mini-01 — R. Olária, 420 — Box 54 — Cidade Industrial Satélite de São Paulo,
+          Guarulhos/SP, CEP 07223-260. E-mail:{" "}
+          <a href="mailto:suporte2@heropartes.com.br">suporte2@heropartes.com.br</a>.
+        </p>
+      </>
     ),
   },
   {
@@ -41,8 +50,8 @@ const sections = [
           </li>
           <li>
             <strong>Microsoft Clarity:</strong> registro de como a página é usada — cliques, rolagem,
-            movimento do mouse e mapas de calor —, além de aparelho e navegador. Usa cookies e{" "}
-            <strong>só é ativado se você aceitar</strong>.
+            movimento do mouse, gravações da navegação e mapas de calor —, além de aparelho e navegador. Usa
+            cookies e <strong>só é ativado se você aceitar</strong>.
           </li>
         </ul>
       </>
@@ -55,18 +64,34 @@ const sections = [
         <li>Entender quais conteúdos e produtos despertam mais interesse;</li>
         <li>Identificar problemas de uso e melhorar o site;</li>
         <li>Medir os resultados das nossas campanhas de divulgação.</li>
+        <li>
+          No caso do Microsoft Clarity, a Microsoft também pode usar os dados nos próprios serviços,
+          inclusive de publicidade.
+        </li>
       </ul>
     ),
   },
   {
     title: "4. Base legal",
     body: (
-      <p>
-        As estatísticas sem cookies (Vercel Analytics) são tratadas com base no legítimo interesse (art. 7º,
-        IX, da LGPD), por serem dados não identificados e indispensáveis ao funcionamento e à melhoria do
-        site. O Google Analytics e o Microsoft Clarity são usados somente com o seu consentimento (art. 7º,
-        I), que pode ser retirado a qualquer momento.
-      </p>
+      <>
+        <p>
+          As estatísticas sem cookies (Vercel Analytics), o registro técnico de acessos feito pela
+          hospedagem e o carregamento do vídeo e do selo do Reclame Aqui se baseiam no legítimo interesse
+          (art. 7º, IX, da LGPD): são necessários para o site funcionar e ser melhorado, e usam apenas o
+          mínimo de dados.
+        </p>
+        <p>
+          O Google Analytics e o Microsoft Clarity são usados somente com o seu consentimento (art. 7º, I),
+          que pode ser retirado a qualquer momento. Esse consentimento abrange também o envio desses dados
+          para servidores do Google e da Microsoft fora do Brasil, informado no aviso de cookies (art. 33,
+          VIII).
+        </p>
+        <p>
+          Você não é obrigado a consentir. Se recusar, todo o site continua funcionando normalmente; apenas
+          as suas visitas não entram nas nossas estatísticas de uso.
+        </p>
+      </>
     ),
   },
   {
@@ -75,9 +100,12 @@ const sections = [
       <>
         <p>
           Ao entrar no site pela primeira vez, você escolhe se aceita ou recusa os cookies de análise. Se
-          recusar, eles não são carregados. Você pode mudar de ideia quando quiser pelo link{" "}
-          <strong>Preferências de cookies</strong>, no rodapé de qualquer página — ao recusar, os cookies de
-          análise gravados anteriormente são apagados.
+          recusar, eles não são carregados. Guardamos no seu navegador a sua escolha, com a data e a versão
+          desta política; se ela mudar o que é coletado, o aviso aparece de novo para você decidir. Você
+          pode mudar de ideia quando quiser pelo link <strong>Preferências de cookies</strong>, no rodapé
+          de qualquer página — ao recusar, os cookies de análise gravados no domínio do site são apagados.
+          Cookies gravados pela Microsoft no domínio dela podem ser apagados nas configurações do seu
+          navegador.
         </p>
         <p>
           Também é possível bloquear ou apagar cookies nas configurações do seu navegador.
@@ -92,8 +120,10 @@ const sections = [
         <p>
           Não vendemos dados. Os dados de navegação são processados pelos fornecedores das ferramentas
           citadas acima, que podem armazená-los em servidores fora do Brasil, com as garantias previstas nas
-          suas próprias políticas:
+          suas próprias políticas. Pelos termos do Microsoft Clarity, a Microsoft também pode usar esses
+          dados para melhorar os próprios serviços, inclusive de publicidade.
         </p>
+        <p>Fornecedores e suas políticas de privacidade:</p>
         <ul>
           <li>
             Google (Google Analytics e Tag Manager) —{" "}
@@ -147,37 +177,90 @@ const sections = [
         Os botões de WhatsApp, e-mail, Mercado Livre, Shopee, portal do revendedor e redes sociais levam a
         serviços de terceiros. O que você enviar ou fizer neles segue a política de privacidade de cada
         serviço. Quando você nos chama no WhatsApp ou por e-mail, usamos seus dados apenas para responder ao
-        seu contato e atender ao seu pedido.
+        seu contato e atender ao seu pedido (art. 7º, V, da LGPD).
       </p>
     ),
   },
   {
     title: "8. Por quanto tempo guardamos",
     body: (
-      <p>
-        Os dados de navegação ficam armazenados pelo prazo configurado em cada ferramenta, e são mantidos
-        apenas enquanto forem úteis para as finalidades acima.
-      </p>
+      <ul>
+        <li>
+          <strong>Google Analytics:</strong> os dados de eventos e de usuários ficam guardados por 14 meses
+          e depois são apagados automaticamente. O cookie <code>_ga</code> dura até 2 anos no seu navegador.
+        </li>
+        <li>
+          <strong>Microsoft Clarity:</strong> os cookies <code>_clck</code> e <code>_clsk</code> duram até 1
+          ano e 1 dia, respectivamente. As gravações e os mapas de calor ficam com a Microsoft pelos prazos do
+          serviço.
+        </li>
+        <li>
+          <strong>Vercel Analytics:</strong> guarda apenas estatísticas agregadas, sem identificar ninguém.
+        </li>
+        <li>
+          <strong>Contatos por WhatsApp e e-mail:</strong> mantidos enquanto forem necessários para o seu
+          atendimento e pelo prazo exigido por lei para pedidos e documentos fiscais.
+        </li>
+      </ul>
     ),
   },
   {
     title: "9. Seus direitos",
     body: (
+      <>
+        <p>
+          Pelo art. 18 da LGPD, você pode pedir, a qualquer momento e sem custo:
+        </p>
+        <ul>
+          <li>a confirmação de que tratamos seus dados e o acesso a eles;</li>
+          <li>a correção de dados incompletos, inexatos ou desatualizados;</li>
+          <li>
+            a anonimização, o bloqueio ou a eliminação de dados desnecessários, excessivos ou tratados em
+            desconformidade com a lei;
+          </li>
+          <li>a portabilidade dos dados a outro fornecedor;</li>
+          <li>a eliminação dos dados tratados com o seu consentimento;</li>
+          <li>a informação sobre com quem compartilhamos seus dados;</li>
+          <li>a informação sobre a possibilidade de não consentir e as consequências da recusa;</li>
+          <li>a revogação do consentimento;</li>
+          <li>a oposição a um tratamento feito sem consentimento, se ele descumprir a lei.</li>
+        </ul>
+        <p>
+          Para isso, escreva para{" "}
+          <a href="mailto:suporte2@heropartes.com.br">suporte2@heropartes.com.br</a>. Respondemos em até 15
+          dias (art. 19). Você também pode apresentar reclamação à Agência Nacional de Proteção de Dados
+          (ANPD) ou aos órgãos de defesa do consumidor.
+        </p>
+      </>
+    ),
+  },
+  {
+    title: "10. Encarregado pelo tratamento de dados",
+    body: (
       <p>
-        Pela LGPD, você pode pedir a confirmação de que tratamos seus dados, acesso, correção, anonimização,
-        eliminação, informações sobre compartilhamento e a revogação do consentimento. Para isso, escreva
-        para{" "}
-        <a href="mailto:suporte2@heropartes.com.br">suporte2@heropartes.com.br</a>. Você também pode
-        apresentar reclamação à Autoridade Nacional de Proteção de Dados (ANPD).
+        A Hero Partes é empresa de pequeno porte e, nos termos da Resolução CD/ANPD nº 2/2022, está
+        dispensada de indicar um encarregado (art. 41 da LGPD). O canal para qualquer assunto sobre dados
+        pessoais é o e-mail{" "}
+        <a href="mailto:suporte2@heropartes.com.br">suporte2@heropartes.com.br</a>.
       </p>
     ),
   },
   {
-    title: "10. Alterações nesta política",
+    title: "11. Crianças e adolescentes",
+    body: (
+      <p>
+        Este site é voltado a empresas, oficinas, lojistas e motoristas, e não se destina a menores de 18
+        anos. Não coletamos intencionalmente dados de crianças ou adolescentes.
+      </p>
+    ),
+  },
+  {
+    title: "12. Alterações nesta política",
     body: (
       <p>
         Esta política pode ser atualizada para refletir mudanças no site ou na legislação. A data da última
-        atualização fica sempre indicada no topo desta página.
+        atualização fica sempre indicada no topo desta página. Se a mudança alterar o que é coletado ou com
+        quem é compartilhado, o aviso de cookies aparece de novo para você decidir.
       </p>
     ),
   },

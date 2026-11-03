@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useSyncExternalStore } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import Script from "next/script";
 
 type Consent = "accepted" | "rejected";
@@ -8,22 +8,29 @@ type Consent = "accepted" | "rejected";
 type ConsentState = Consent | null | "pending";
 
 const STORAGE_KEY = "hp-cookie-consent";
+// Trocar sempre que o aviso ou a política mudarem o que é coletado ou com quem
+// é compartilhado (junto com UPDATED_AT em politica-de-privacidade/page.tsx):
+// escolhas de versões anteriores deixam de valer e o aviso volta a aparecer
+// (LGPD, art. 8º, § 6º).
+const CONSENT_VERSION = "2026-11-03";
 const OPEN_EVENT = "hp-open-cookie-consent";
 const CHANGE_EVENT = "hp-cookie-consent-change";
 
-// Cookies gravados pelo Google Analytics (via GTM) e pelo Microsoft Clarity.
-const TRACKING_COOKIES = /^(_ga|_gid|_gat|_gcl|_clck|_clsk|CLID|MUID|ANONCHK|SM)/;
+// Cookies que o Google Analytics (via GTM) e o Microsoft Clarity gravam no
+// domínio do site. Os do domínio da Microsoft não são acessíveis daqui.
+const TRACKING_COOKIES = /^(_ga|_ga_\w+|_gid|_gat\w*|_gcl_\w+|_clck|_clsk)$/;
 
-// Cópia em memória para quando o navegador bloqueia o localStorage.
+// Usada só quando o navegador bloqueia o localStorage.
 let memoryConsent: Consent | null = null;
 
+// A escolha é guardada com a versão e a data em que foi feita.
 function readConsent(): Consent | null {
-  if (memoryConsent) return memoryConsent;
   try {
-    const value = localStorage.getItem(STORAGE_KEY);
-    return value === "accepted" || value === "rejected" ? value : null;
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? "null");
+    if (saved?.version !== CONSENT_VERSION) return memoryConsent;
+    return saved.choice === "accepted" || saved.choice === "rejected" ? saved.choice : memoryConsent;
   } catch {
-    return null;
+    return memoryConsent;
   }
 }
 
@@ -63,20 +70,43 @@ export function CookieConsent() {
     return () => window.removeEventListener(OPEN_EVENT, open);
   }, []);
 
+  // Recusa feita em outra aba: os scripts já carregados aqui continuariam
+  // coletando, então recarrega a página. O listener fica fixo porque a troca
+  // de consent desmontaria um listener dependente dele no meio do evento.
+  const trackingLoaded = useRef(false);
+  useEffect(() => {
+    if (consent === "accepted") trackingLoaded.current = true;
+  }, [consent]);
+  useEffect(() => {
+    const onStorage = (e: StorageEvent) => {
+      if (e.key === STORAGE_KEY && trackingLoaded.current && readConsent() !== "accepted") {
+        window.location.reload();
+      }
+    };
+    window.addEventListener("storage", onStorage);
+    return () => window.removeEventListener("storage", onStorage);
+  }, []);
+
   const choose = (value: Consent) => {
     const previous = consent;
-    memoryConsent = value;
     try {
-      localStorage.setItem(STORAGE_KEY, value);
-    } catch {}
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify({ choice: value, version: CONSENT_VERSION, date: new Date().toISOString() }),
+      );
+    } catch {
+      memoryConsent = value;
+    }
     setReopened(false);
 
-    // Os scripts já carregados não têm como ser descarregados: limpa os
-    // cookies e recarrega a página para parar a coleta de imediato.
-    if (value === "rejected" && previous === "accepted") {
+    // Ao recusar, apaga também cookies de um aceite antigo. Se os scripts já
+    // carregaram nesta página, não têm como ser descarregados: recarrega.
+    if (value === "rejected") {
       clearTrackingCookies();
-      window.location.reload();
-      return;
+      if (previous === "accepted") {
+        window.location.reload();
+        return;
+      }
     }
     window.dispatchEvent(new Event(CHANGE_EVENT));
   };
@@ -103,8 +133,11 @@ export function CookieConsent() {
         >
           <p className="font-display text-base font-bold text-brand-green">Sua privacidade</p>
           <p className="mt-2 text-sm text-muted-foreground">
-            Usamos cookies de análise (Google Analytics e Microsoft Clarity) para entender como o
-            site é usado e melhorá-lo. Eles só são ativados se você aceitar. Saiba mais na nossa{" "}
+            Usamos cookies de análise do Google Analytics e do Microsoft Clarity, que registra como a
+            página é usada, para entender o uso do site e melhorá-lo. Os dados vão para o Google e a
+            Microsoft, inclusive para servidores fora do Brasil, e a Microsoft também pode usá-los nos
+            próprios serviços, incluindo publicidade. Eles só são ativados se você aceitar; se
+            recusar, o site funciona normalmente. Saiba mais na nossa{" "}
             <a href="/politica-de-privacidade" className="font-semibold text-brand-green underline">
               Política de Privacidade
             </a>
