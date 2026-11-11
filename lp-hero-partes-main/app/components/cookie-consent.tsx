@@ -8,8 +8,9 @@ type Consent = "accepted" | "rejected";
 type ConsentState = Consent | null | "pending";
 
 const STORAGE_KEY = "hp-cookie-consent";
-// Trocar sempre que o aviso ou a política mudarem o que é coletado ou com quem
-// é compartilhado (junto com UPDATED_AT em politica-de-privacidade/page.tsx):
+// Trocar sempre que o aviso ou a política mudarem o que os cookies de análise
+// coletam ou com quem compartilham (junto com UPDATED_AT em
+// politica-de-privacidade/page.tsx):
 // escolhas de versões anteriores deixam de valer e o aviso volta a aparecer
 // (LGPD, art. 8º, § 6º).
 const CONSENT_VERSION = "2026-11-03";

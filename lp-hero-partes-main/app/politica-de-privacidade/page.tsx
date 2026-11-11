@@ -5,12 +5,12 @@ import { WhatsAppButton } from "../components/whatsapp-button";
 
 export const metadata: Metadata = {
   title: "Política de Privacidade | Hero Partes",
-  description: "Como a Hero Partes trata os dados de quem visita o site, em conformidade com a LGPD.",
+  description: "Como a Hero Partes trata os dados de visitantes do site e de clientes, em conformidade com a LGPD.",
 };
 
-// Ao mudar o que é coletado ou com quem é compartilhado, trocar também
-// CONSENT_VERSION em components/cookie-consent.tsx.
-const UPDATED_AT = "3 de novembro de 2026";
+// Ao mudar o que os cookies de análise coletam ou com quem compartilham, trocar
+// também CONSENT_VERSION em components/cookie-consent.tsx.
+const UPDATED_AT = "11 de novembro de 2026";
 
 const sections = [
   {
@@ -19,8 +19,9 @@ const sections = [
       <>
         <p>
           Este site é mantido pela <strong>Hero Partes Soluções Empreendedoras Ltda.</strong>, inscrita no
-          CNPJ sob o nº 45.776.153/0001-63, que é a controladora dos dados pessoais tratados aqui, nos
-          termos da Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018 — LGPD).
+          CNPJ sob o nº 45.776.153/0001-63, que é a controladora dos dados pessoais de visitantes do site
+          e de clientes descritos aqui, nos termos da Lei Geral de Proteção de Dados Pessoais (Lei nº
+          13.709/2018 — LGPD).
         </p>
         <p>
           Endereço: Mini-01 — R. Olária, 420 — Box 54 — Cidade Industrial Satélite de São Paulo,
@@ -31,12 +32,12 @@ const sections = [
     ),
   },
   {
-    title: "2. Quais dados coletamos",
+    title: "2. Dados coletados pelo site",
     body: (
       <>
         <p>
-          O site não possui formulários de cadastro: não pedimos nome, e-mail, telefone ou documentos. Os
-          dados coletados são apenas de navegação:
+          O site não possui formulários de cadastro: não pedimos nome, e-mail, telefone ou documentos. No
+          site, os dados coletados são apenas de navegação (os dados de clientes estão no item 3):
         </p>
         <ul>
           <li>
@@ -58,7 +59,46 @@ const sections = [
     ),
   },
   {
-    title: "3. Para que usamos os dados",
+    title: "3. Dados de clientes e comunicações",
+    body: (
+      <>
+        <p>
+          Quando você compra da Hero Partes — diretamente, pelo WhatsApp, pelo portal de revendedores ou
+          por marketplaces como Mercado Livre e Shopee — ou fala conosco, guardamos no nosso cadastro de
+          clientes: nome, CPF ou CNPJ, telefone, e-mail, endereço e histórico de compras.
+        </p>
+        <p>Usamos esses dados para:</p>
+        <ul>
+          <li>
+            processar e entregar seus pedidos, dar suporte e atender trocas e garantias (art. 7º, V, da
+            LGPD);
+          </li>
+          <li>emitir notas fiscais e cumprir outras obrigações legais (art. 7º, II);</li>
+          <li>
+            enviar ofertas, promoções e novidades por e-mail, WhatsApp, SMS ou ligação, com base no nosso
+            legítimo interesse em divulgar nossos produtos a quem já comprou ou já entrou em contato
+            conosco (art. 7º, IX, e art. 10, I).
+          </li>
+        </ul>
+        <p>
+          <strong>Você pode deixar de receber ofertas a qualquer momento</strong>, sem custo: pelo link
+          &quot;sair&quot; nos e-mails, respondendo &quot;PARAR&quot; no WhatsApp ou no SMS, pedindo durante a
+          ligação ou escrevendo para{" "}
+          <a href="mailto:suporte2@heropartes.com.br">suporte2@heropartes.com.br</a>. A recusa não afeta
+          suas compras nem o seu atendimento.
+        </p>
+        <p>
+          Esses dados podem ser compartilhados com quem nos ajuda a atender seus pedidos — o nosso sistema
+          de gestão, os marketplaces onde a compra foi feita, os meios de pagamento, as transportadoras e a
+          contabilidade — e com as ferramentas que usamos para enviar mensagens e ofertas. Algumas delas,
+          como o WhatsApp, podem armazenar dados em servidores fora do Brasil. Não vendemos dados de
+          clientes.
+        </p>
+      </>
+    ),
+  },
+  {
+    title: "4. Para que usamos os dados do site",
     body: (
       <ul>
         <li>Entender quais conteúdos e produtos despertam mais interesse;</li>
@@ -72,7 +112,7 @@ const sections = [
     ),
   },
   {
-    title: "4. Base legal",
+    title: "5. Base legal dos dados do site",
     body: (
       <>
         <p>
@@ -95,7 +135,7 @@ const sections = [
     ),
   },
   {
-    title: "5. Cookies e como gerenciar sua escolha",
+    title: "6. Cookies e como gerenciar sua escolha",
     body: (
       <>
         <p>
@@ -114,7 +154,7 @@ const sections = [
     ),
   },
   {
-    title: "6. Com quem os dados são compartilhados",
+    title: "7. Com quem os dados do site são compartilhados",
     body: (
       <>
         <p>
@@ -171,18 +211,18 @@ const sections = [
     ),
   },
   {
-    title: "7. Links para outros sites",
+    title: "8. Links para outros sites",
     body: (
       <p>
         Os botões de WhatsApp, e-mail, Mercado Livre, Shopee, portal do revendedor e redes sociais levam a
         serviços de terceiros. O que você enviar ou fizer neles segue a política de privacidade de cada
-        serviço. Quando você nos chama no WhatsApp ou por e-mail, usamos seus dados apenas para responder ao
-        seu contato e atender ao seu pedido (art. 7º, V, da LGPD).
+        serviço. Quando você nos chama no WhatsApp ou por e-mail, seus dados passam a fazer parte do nosso
+        cadastro de clientes, descrito no item 3.
       </p>
     ),
   },
   {
-    title: "8. Por quanto tempo guardamos",
+    title: "9. Por quanto tempo guardamos",
     body: (
       <ul>
         <li>
@@ -198,14 +238,17 @@ const sections = [
           <strong>Vercel Analytics:</strong> guarda apenas estatísticas agregadas, sem identificar ninguém.
         </li>
         <li>
-          <strong>Contatos por WhatsApp e e-mail:</strong> mantidos enquanto forem necessários para o seu
-          atendimento e pelo prazo exigido por lei para pedidos e documentos fiscais.
+          <strong>Dados de clientes:</strong> guardados por 5 anos a partir da última compra; cada nova
+          compra reinicia esse prazo. Depois disso, são eliminados, exceto o que a lei nos obrigar a manter.
+          Quem entrou em contato mas não comprou tem os dados eliminados 2 anos após o último contato.
+          Se você pedir para não receber ofertas, seus dados continuam guardados apenas para atender suas
+          compras e cumprir a lei, nunca para campanhas.
         </li>
       </ul>
     ),
   },
   {
-    title: "9. Seus direitos",
+    title: "10. Seus direitos",
     body: (
       <>
         <p>
@@ -235,7 +278,7 @@ const sections = [
     ),
   },
   {
-    title: "10. Encarregado pelo tratamento de dados",
+    title: "11. Encarregado pelo tratamento de dados",
     body: (
       <p>
         A Hero Partes é empresa de pequeno porte e, nos termos da Resolução CD/ANPD nº 2/2022, está
@@ -246,7 +289,7 @@ const sections = [
     ),
   },
   {
-    title: "11. Crianças e adolescentes",
+    title: "12. Crianças e adolescentes",
     body: (
       <p>
         Este site é voltado a empresas, oficinas, lojistas e motoristas, e não se destina a menores de 18
@@ -255,12 +298,12 @@ const sections = [
     ),
   },
   {
-    title: "12. Alterações nesta política",
+    title: "13. Alterações nesta política",
     body: (
       <p>
         Esta política pode ser atualizada para refletir mudanças no site ou na legislação. A data da última
-        atualização fica sempre indicada no topo desta página. Se a mudança alterar o que é coletado ou com
-        quem é compartilhado, o aviso de cookies aparece de novo para você decidir.
+        atualização fica sempre indicada no topo desta página. Se a mudança alterar o que os cookies de
+        análise coletam ou com quem compartilham, o aviso de cookies aparece de novo para você decidir.
       </p>
     ),
   },
