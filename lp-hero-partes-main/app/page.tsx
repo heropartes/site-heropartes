@@ -5,6 +5,7 @@ import { Header } from "./components/header";
 import { Catalog } from "./components/catalog";
 import { Reseller } from "./components/reseller";
 import { Marketplaces } from "./components/marketplace";
+import { Faq } from "./components/faq";
 import { Contact } from "./components/contact";
 import { Footer } from "./components/footer";
 import { WhatsAppButton } from "./components/whatsapp-button";
@@ -20,6 +21,7 @@ export default async function Home() {
       <Catalog />
       <Reseller />
       <Marketplaces />
+      <Faq />
       <Contact />
       <Footer />
       <WhatsAppButton />
