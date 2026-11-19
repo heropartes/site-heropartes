@@ -6,6 +6,7 @@ export function Header() {
     { label: "Comprar Agora", href: "#comprar" },
     { label: "Nossa História", href: "#sobre" },
     { label: "Produtos", href: "#produtos" },
+    { label: "FAQ", href: "#duvidas" },
     { label: "Contato", href: "#contato" },
   ];
   return (

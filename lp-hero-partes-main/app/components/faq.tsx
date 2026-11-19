@@ -24,20 +24,20 @@ const questions = [
   {
     q: "Como saber se a peça é compatível com meu veículo?",
     a: [
-      "Todas as informações de aplicação, como modelos de veículos compatíveis, anos e números originais (OEM), estão descritas em nosso catálogo de produtos e nos anúncios das peças. Isso facilita a confirmação da compatibilidade antes da compra.",
+      "Todas as informações de aplicação, como modelos de veículos compatíveis, anos e números originais (OEM), estão descritas em nosso [catálogo de produtos](https://catalogo.heropartes.net/) e nos anúncios das peças. Isso facilita a confirmação da compatibilidade antes da compra.",
       "Caso ainda tenha dúvidas, entre em contato com nossa equipe informando o número do chassi do veículo, e teremos prazer em ajudar na verificação da aplicação correta.",
     ],
   },
   {
     q: "Onde posso comprar os produtos da Hero Partes?",
     a: [
-      "Você pode encontrar os produtos da Hero Partes com revendedores parceiros e também nas lojas oficiais da marca nos principais marketplaces e canais digitais.",
+      "Você pode encontrar os produtos da Hero Partes com revendedores parceiros e também nas lojas oficiais da marca nos principais [marketplaces](#comprar) e canais digitais.",
     ],
   },
   {
     q: "Como posso me tornar um revendedor da Hero Partes?",
     a: [
-      "Para revender nossos produtos, basta realizar o cadastro em nosso portal B2B. Após a análise cadastral, você terá acesso ao catálogo e às condições comerciais.",
+      "Para revender nossos produtos, basta realizar o cadastro em nosso [portal B2B](https://portal.heropartes.com.br/). Após a análise cadastral, você terá acesso ao catálogo e às condições comerciais.",
     ],
   },
   {
@@ -149,9 +149,49 @@ const questions = [
 const WHATSAPP = "(11) 93096-0160";
 const WHATSAPP_URL = "https://wa.me/5511930960160";
 
+// Links escritos nas respostas como [texto](endereço). Endereços com # rolam
+// suavemente até a seção, como o botão de marketplaces do banner.
+const MARKED_LINK = /\[([^\]]+)\]\(([^)]+)\)/g;
+
+function renderAnswer(text: string): ReactNode[] {
+  const nodes: ReactNode[] = [];
+  let last = 0;
+  for (const match of text.matchAll(MARKED_LINK)) {
+    const [whole, label, href] = match;
+    const i = match.index;
+    nodes.push(...linkify(text.slice(last, i), i));
+    last = i + whole.length;
+    if (href.startsWith("#")) {
+      nodes.push(
+        <a
+          key={`l${i}`}
+          href={href}
+          onClick={(e) => {
+            // Ctrl/cmd/shift ou botão do meio seguem o comportamento normal (nova aba).
+            if (e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey) return;
+            e.preventDefault();
+            document.getElementById(href.slice(1))?.scrollIntoView({ behavior: "smooth" });
+          }}
+        >
+          {label}
+        </a>,
+      );
+    } else {
+      nodes.push(
+        <a key={`l${i}`} href={href} target="_blank" rel="noopener noreferrer">
+          {label}
+        </a>,
+      );
+    }
+  }
+  nodes.push(...linkify(text.slice(last), last));
+  return nodes;
+}
+
 // Torna clicáveis o WhatsApp e os e-mails citados nas respostas.
-function linkify(text: string): ReactNode[] {
-  return text.split(/(\(11\) 93096-0160|[\w.]+@heropartes\.com\.br)/).map((part, i) => {
+function linkify(text: string, keyPrefix: number): ReactNode[] {
+  return text.split(/(\(11\) 93096-0160|[\w.]+@heropartes\.com\.br)/).map((part, j) => {
+    const i = `${keyPrefix}-${j}`;
     if (part === WHATSAPP) {
       return (
         <a key={i} href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
@@ -178,7 +218,7 @@ const faqJsonLd = {
   mainEntity: questions.map(({ q, a }) => ({
     "@type": "Question",
     name: q,
-    acceptedAnswer: { "@type": "Answer", text: a.join(" ") },
+    acceptedAnswer: { "@type": "Answer", text: a.join(" ").replace(MARKED_LINK, "$1") },
   })),
 };
 
@@ -235,7 +275,7 @@ export function Faq() {
               </AccordionTrigger>
               <AccordionContent className="space-y-3 leading-relaxed text-muted-foreground [&_a]:font-semibold [&_a]:text-brand-green [&_a]:underline">
                 {a.map((p) => (
-                  <p key={p}>{linkify(p)}</p>
+                  <p key={p}>{renderAnswer(p)}</p>
                 ))}
               </AccordionContent>
             </AccordionItem>
