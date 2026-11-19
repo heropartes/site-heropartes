@@ -47,8 +47,8 @@ export function Footer() {
       <div className="checker-pattern absolute inset-0 opacity-30" />
       <div className="relative mx-auto grid max-w-6xl gap-10 px-6 py-16 md:grid-cols-3">
         <div className="space-y-4">
-          {features.map(({ icon: Icon, title, desc }) => (
-            <div key={title} className="rounded-xl bg-white p-5 shadow-card-soft">
+          {features.map(({ icon: Icon, title, desc }, i) => (
+            <div key={title} data-reveal="left" className={`reveal-delay-${i} rounded-xl bg-white p-5 shadow-card-soft`}>
               <div className="flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-yellow/20">
                   <Icon className="h-5 w-5 text-brand-green" strokeWidth={1.6} />
@@ -89,12 +89,23 @@ export function Footer() {
           <p>Sex - 7h30 às 16h30</p>
         </div>
         <div className="space-y-6">
-          <div>
+          <a
+            href="https://portal.heropartes.com.br/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group block"
+            onClick={() => {
+              window.gtag?.("event", "click_revendedor", {
+                event_category: "resselert_footer_link",
+                event_label: "User clicked on -Se torne um Revendedor HERO- footer link",
+              });
+            }}
+          >
             <p className="font-display text-xl font-bold text-white">
               Se torne um <br />
-              <span className="text-brand-yellow">Revendedor HERO</span>
+              <span className="text-brand-yellow underline-offset-4 group-hover:underline">Revendedor HERO</span>
             </p>
-          </div>
+          </a>
           <div>
             <p className="font-display text-xl font-bold text-white">
               Adquira <span className="text-brand-yellow">peças</span> <br />

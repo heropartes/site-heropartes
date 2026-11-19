@@ -247,20 +247,21 @@ export function Faq() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       <div className="mx-auto max-w-3xl px-6">
-        <h2 className="text-center font-display text-3xl font-bold text-brand-green md:text-4xl">
+        <h2 data-reveal className="text-center font-display text-3xl font-bold text-brand-green md:text-4xl">
           Perguntas Frequentes
         </h2>
-        <p className="mt-3 text-center text-muted-foreground">
+        <p data-reveal className="reveal-delay-1 mt-3 text-center text-muted-foreground">
           Tire suas dúvidas sobre nossos produtos, compras e entregas.
         </p>
 
         <Accordion
+          data-reveal
           id="faq-lista"
           type="single"
           collapsible
           value={open}
           onValueChange={setOpen}
-          className="mt-10 rounded-xl border border-border bg-card px-6 shadow-card-soft"
+          className="reveal-delay-2 mt-10 rounded-xl border border-border bg-card px-6 shadow-card-soft"
         >
           {questions.map(({ q, a }, i) => (
             <AccordionItem
@@ -281,7 +282,7 @@ export function Faq() {
           ))}
         </Accordion>
 
-        <div className="mt-8 text-center">
+        <div data-reveal className="reveal-delay-3 mt-8 text-center">
           <button
             type="button"
             aria-expanded={showAll}

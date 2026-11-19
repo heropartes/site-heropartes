@@ -16,14 +16,15 @@ export function Contact() {
     <section id="contato" className="relative overflow-hidden bg-brand-green-deep py-20">
       <div className="checker-pattern absolute inset-0 opacity-50" />
       <div className="relative mx-auto max-w-6xl px-6 text-center">
-        <h2 className="font-display text-3xl font-bold text-white md:text-4xl">Fale Conosco</h2>
-        <p className="mt-3 text-white/80">
+        <h2 data-reveal className="font-display text-3xl font-bold text-white md:text-4xl">Fale Conosco</h2>
+        <p data-reveal className="reveal-delay-1 mt-3 text-white/80">
           Entre em contato e tire suas dúvidas. Estamos prontos para atender você!
         </p>
         <div className="mt-10 grid gap-5 sm:grid-cols-3">
-          {items.map(({ icon: Icon, label, value, href }) => (
+          {items.map(({ icon: Icon, label, value, href }, i) => (
             <a
               key={label}
+              data-reveal
               href={href}
               target="_blank"
               rel="noopener noreferrer"
@@ -35,7 +36,7 @@ export function Contact() {
               }
 
               }
-              className="rounded-xl bg-white p-7 shadow-card-soft cursor-pointer hover:shadow-card"
+              className={`reveal-delay-${i} rounded-xl bg-white p-7 shadow-card-soft cursor-pointer hover:shadow-card`}
             >
               <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-brand-yellow/20">
                 <Icon className="h-6 w-6 text-brand-green" strokeWidth={1.6} />
@@ -46,6 +47,7 @@ export function Contact() {
           ))}
         </div>
         <Button
+          data-reveal
           size="lg"
           onClick={() => {
             window.gtag?.("event", "click_catalog", {

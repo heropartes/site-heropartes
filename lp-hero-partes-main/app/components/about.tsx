@@ -146,7 +146,7 @@ export function About() {
   return (
     <section id="sobre" className="bg-background pb-20">
       <div className="mx-auto max-w-6xl px-6">
-        <div className="relative overflow-hidden rounded-3xl bg-hero-gradient p-8 md:p-14">
+        <div data-reveal className="relative overflow-hidden rounded-3xl bg-hero-gradient p-8 md:p-14">
 
           {/* Seta esquerda */}
           <button
@@ -255,11 +255,12 @@ export function About() {
         {/* Redes Sociais */}
         <div id="redes-sociais" className="mt-10 flex scroll-mt-4 flex-wrap justify-center gap-8">
           <a
+            data-reveal="zoom"
             href="https://www.instagram.com/heropartes/"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Instagram"
-            className="group flex flex-col items-center gap-2 text-foreground/50 transition-colors hover:text-[#e21d92]"
+            className="reveal-delay-0 group flex flex-col items-center gap-2 text-foreground/50 transition-colors hover:text-[#e21d92]"
           >
             <span
               className="flex h-16 w-16 items-center justify-center rounded-full border border-foreground/10 transition-all"
@@ -284,11 +285,12 @@ export function About() {
           </a>
 
           <a
+            data-reveal="zoom"
             href="https://www.facebook.com/people/Hero-Partes/100083576190261/"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Facebook"
-            className="group flex flex-col items-center gap-2 text-foreground/50 transition-colors hover:text-[#1877F2]"
+            className="reveal-delay-1 group flex flex-col items-center gap-2 text-foreground/50 transition-colors hover:text-[#1877F2]"
           >
             <span className="flex h-16 w-16 items-center justify-center rounded-full border border-foreground/10 transition-all group-hover:border-[#1877F2]/30 group-hover:bg-[#1877F2]/5">
               <svg viewBox="0 0 24 24" fill="currentColor" className="h-8 w-8" aria-hidden="true">
@@ -299,11 +301,12 @@ export function About() {
           </a>
 
           <a
+            data-reveal="zoom"
             href="https://www.youtube.com/@HeroPartesAutomotive"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="YouTube"
-            className="group flex flex-col items-center gap-2 text-foreground/50 transition-colors hover:text-[#FF0000]"
+            className="reveal-delay-2 group flex flex-col items-center gap-2 text-foreground/50 transition-colors hover:text-[#FF0000]"
           >
             <span className="flex h-16 w-16 items-center justify-center rounded-full border border-foreground/10 transition-all group-hover:border-[#FF0000]/30 group-hover:bg-[#FF0000]/5">
               <svg viewBox="0 0 24 24" fill="currentColor" className="h-8 w-8" aria-hidden="true">
@@ -314,11 +317,12 @@ export function About() {
           </a>
 
           <a
+            data-reveal="zoom"
             href="https://www.reclameaqui.com.br/empresa/hero-partes-solucoes-empreendedoras-ltda/"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Reclame Aqui"
-            className="group flex flex-col items-center gap-2 text-foreground/50 transition-colors hover:text-[#0a7739]"
+            className="reveal-delay-3 group flex flex-col items-center gap-2 text-foreground/50 transition-colors hover:text-[#0a7739]"
           >
             <span className="flex h-16 w-16 items-center justify-center rounded-full border border-foreground/10 transition-all group-hover:border-[#96bd2e] group-hover:bg-[#cfe4c5]/30" style={{ transition: "border-color 0.3s, background-color 0.3s, box-shadow 0.3s" }} onMouseEnter={e => (e.currentTarget as HTMLElement).style.boxShadow = "0 0 0 3px #c4dc8c55"} onMouseLeave={e => (e.currentTarget as HTMLElement).style.boxShadow = ""}>
               <svg viewBox="0 0 24 24" fill="currentColor" className="h-8 w-8" aria-hidden="true">

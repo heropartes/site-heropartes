@@ -215,3 +215,85 @@
     linear-gradient(-45deg, oklch(0.78 0.17 75 / 0.15) 25%, transparent 25%);
   background-size: 24px 24px;
 }
+
+/*
+ * Animações ao rolar. components/scroll-effects.tsx põe a classe .reveal-on no
+ * <html> (só se o sistema não pede movimento reduzido) e marca .is-visible em
+ * cada [data-reveal] quando ele entra na tela. Sem JavaScript, tudo aparece
+ * normalmente. A animação usa fill-mode "backwards" para, ao terminar, não
+ * prender o transform e deixar os efeitos de hover dos cards funcionando.
+ */
+html {
+  scroll-padding-top: 72px;
+}
+
+.reveal-on [data-reveal]:not(.is-visible) {
+  opacity: 0;
+}
+.reveal-on [data-reveal].is-visible {
+  animation: reveal-up 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) var(--reveal-delay, 0ms) backwards;
+}
+.reveal-on [data-reveal="left"].is-visible {
+  animation-name: reveal-left;
+}
+.reveal-on [data-reveal="right"].is-visible {
+  animation-name: reveal-right;
+}
+.reveal-on [data-reveal="zoom"].is-visible {
+  animation-name: reveal-zoom;
+}
+.reveal-on [data-reveal].reveal-instant {
+  animation: none;
+}
+/* Na impressão, tudo aparece, mesmo o que não foi rolado até a tela. */
+@media print {
+  .reveal-on [data-reveal] {
+    opacity: 1 !important;
+    animation: none !important;
+  }
+}
+
+@keyframes reveal-up {
+  from { opacity: 0; transform: translateY(32px); }
+}
+@keyframes reveal-left {
+  from { opacity: 0; transform: translateX(-48px); }
+}
+@keyframes reveal-right {
+  from { opacity: 0; transform: translateX(48px); }
+}
+@keyframes reveal-zoom {
+  from { opacity: 0; transform: scale(0.85); }
+}
+
+/* Barra de progresso de leitura no menu e parallax nas fotos: usam a linha do
+   tempo de rolagem do próprio navegador, sem JavaScript. Navegadores sem
+   suporte simplesmente não mostram o efeito. */
+.scroll-progress {
+  transform: scaleX(0);
+}
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: scroll()) {
+    .scroll-progress {
+      animation: scroll-progress linear both;
+      animation-timeline: scroll(root);
+    }
+    .parallax-img {
+      animation: parallax linear both;
+      animation-timeline: view();
+    }
+  }
+}
+@keyframes scroll-progress {
+  to { transform: scaleX(1); }
+}
+@keyframes parallax {
+  from { transform: translateY(-6%) scale(1.14); }
+  to { transform: translateY(6%) scale(1.14); }
+}
+
+/* Atraso para itens em sequência (cards entram um depois do outro). */
+.reveal-delay-1 { --reveal-delay: 120ms; }
+.reveal-delay-2 { --reveal-delay: 240ms; }
+.reveal-delay-3 { --reveal-delay: 360ms; }
+.reveal-delay-4 { --reveal-delay: 480ms; }

@@ -9,11 +9,12 @@ import { Faq } from "./components/faq";
 import { Contact } from "./components/contact";
 import { Footer } from "./components/footer";
 import { WhatsAppButton } from "./components/whatsapp-button";
+import { ScrollEffects } from "./components/scroll-effects";
 
 export default async function Home() {
 
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen overflow-x-clip bg-background">
       <Header />
       <Hero />
       <Differentials />
@@ -25,6 +26,7 @@ export default async function Home() {
       <Contact />
       <Footer />
       <WhatsAppButton />
+      <ScrollEffects />
     </main>
   );
 }

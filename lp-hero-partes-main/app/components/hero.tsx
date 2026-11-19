@@ -226,7 +226,7 @@ export function Hero() {
                   event_category: "btn_catalog_hero",
                   event_label: "User clicked on -Acesse nosso Catálogo- button in hero section",
                 });
-                window.open("https://portal.heropartes.com.br/", "_blank");
+                window.open("https://catalogo.heropartes.net/", "_blank");
               }}
               className="bg-brand-yellow text-brand-green-deep hover:bg-brand-yellow-soft font-semibold shadow-card-soft cursor-pointer"
               style={current === 1 || current === 2 ? { boxShadow: "0 4px 14px rgba(0,0,0,0.5)" } : undefined}

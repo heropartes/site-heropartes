@@ -1,5 +1,16 @@
 "use client";
+
+import { useEffect, useState } from "react";
+
 export function Header() {
+  // Sobre o banner o menu é transparente; ao descer a página, fica verde.
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 80);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const links = [
     { label: "Seja um Revendedor Hero", href: "https://portal.heropartes.com.br/" },
@@ -10,7 +21,11 @@ export function Header() {
     { label: "Contato", href: "#contato" },
   ];
   return (
-    <header className="absolute top-0 left-0 right-0 z-30 bg-white/10 backdrop-blur">
+    <header
+      className={`fixed top-0 left-0 right-0 z-40 backdrop-blur transition-colors duration-300 ${
+        scrolled ? "bg-brand-green-deep/95 shadow-lg" : "bg-white/10"
+      }`}
+    >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2">
         <a href="#" className="flex items-center gap-2">
           <img src="/logoHeroPartes.png" alt="Hero Partes" className="h-10 w-auto drop-shadow-lg" />
@@ -48,6 +63,7 @@ export function Header() {
           Catálogo Online
         </a>
       </div>
+      <div className="scroll-progress absolute bottom-0 left-0 h-0.5 w-full origin-left bg-brand-yellow" />
     </header>
   );
 }

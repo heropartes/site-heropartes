@@ -5,29 +5,31 @@ import { Zap, Cog, Ruler, Wrench } from "lucide-react";
 
 export function Catalog() {
   const cats = [
-    { icon: Zap, label: "Coxins do Motor", href: "https://portal.heropartes.com.br/" },
-    { icon: Cog, label: "Coxins de Câmbio", href: "https://portal.heropartes.com.br/" },
-    { icon: Ruler, label: "Braços, Buchas e Bandejas", href: "https://portal.heropartes.com.br/" },
+    { icon: Zap, label: "Coxins do Motor", href: "https://catalogo.heropartes.net/busca?produto=Coxim%20Motor" },
+    { icon: Cog, label: "Coxins de Câmbio", href: "https://catalogo.heropartes.net/busca?produto=Coxim%20C%C3%A2mbio" },
+    { icon: Ruler, label: "Braços, Buchas e Bandejas", href: "https://catalogo.heropartes.net/busca?grupo=Suspens%C3%A3o" },
+    // O catálogo técnico não tem ferramentas: elas só estão no portal.
     { icon: Wrench, label: "Ferramentas", href: "https://portal.heropartes.com.br/" },
   ];
   
   return (
     <section id="produtos" className="bg-secondary py-20">
       <div className="mx-auto max-w-6xl px-6 text-center">
-        <h2 className="font-display text-3xl font-bold text-foreground md:text-4xl">
+        <h2 data-reveal className="font-display text-3xl font-bold text-foreground md:text-4xl">
           O que você encontrará no catálogo?
         </h2>
-        <p className="mt-3 text-muted-foreground">
+        <p data-reveal className="reveal-delay-1 mt-3 text-muted-foreground">
           Temos um catálogo completo de peças para diversas marcas e modelos.
         </p>
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {cats.map(({ icon: Icon, label, href }) => (
+          {cats.map(({ icon: Icon, label, href }, i) => (
             <a
               key={label}
+              data-reveal
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="group rounded-xl bg-card p-6 shadow-card-soft transition-all hover:-translate-y-1 hover:shadow-lg"
+              className={`reveal-delay-${i} group rounded-xl bg-card p-6 shadow-card-soft transition-all hover:-translate-y-1 hover:shadow-lg`}
               onClick={() => {
                 window.gtag?.("event", "click_catalog", {
                   event_category: "btns_catalog",
@@ -44,6 +46,7 @@ export function Catalog() {
           ))}
         </div>
         <Button
+          data-reveal
           size="lg"
           onClick={() => {
             window.gtag?.("event", "click_revendedor", {

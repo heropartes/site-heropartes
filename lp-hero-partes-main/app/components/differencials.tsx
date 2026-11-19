@@ -22,10 +22,11 @@ export function Differentials() {
   return (
     <section className="bg-background py-16">
       <div className="mx-auto grid max-w-6xl gap-6 px-6 md:grid-cols-3">
-        {items.map(({ icon: Icon, title, desc }) => (
+        {items.map(({ icon: Icon, title, desc }, i) => (
           <div
             key={title}
-            className="rounded-xl border border-border bg-card p-8 text-center shadow-card-soft transition-transform hover:-translate-y-1"
+            data-reveal
+            className={`reveal-delay-${i} rounded-xl border border-border bg-card p-8 text-center shadow-card-soft transition-transform hover:-translate-y-1`}
           >
             <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-secondary">
               <Icon className="h-7 w-7 text-brand-green" strokeWidth={1.6} />

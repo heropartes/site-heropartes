@@ -4,17 +4,17 @@ export function Marketplaces() {
     return (
     <section id="comprar" className="bg-yellow-gradient">
       <div className="mx-auto grid max-w-6xl items-center gap-10 px-6 py-16 md:grid-cols-2">
-        <div className="overflow-hidden rounded-2xl shadow-2xl">
+        <div data-reveal="left" className="overflow-clip rounded-2xl shadow-2xl">
           <img
             src="/delivery.png"
             alt="Entrega Hero Partes"
-            className="h-[360px] w-full object-cover"
+            className="parallax-img h-[360px] w-full object-cover"
             loading="lazy"
             width={800}
             height={900}
           />
         </div>
-        <div>
+        <div data-reveal="right" className="reveal-delay-1">
           <h2 className="font-display text-3xl font-bold text-white md:text-4xl">
             Adquira <span className="text-brand-green-deep">peças</span>
             <br /> para o seu veículo

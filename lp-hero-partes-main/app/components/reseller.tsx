@@ -7,7 +7,7 @@ import { use } from "react";
   return (
     <section id="revendedor" className="bg-hero-gradient">
       <div className="mx-auto grid max-w-6xl items-center gap-10 px-6 py-16 md:grid-cols-2">
-        <div>
+        <div data-reveal="left">
           <h2 className="font-display text-3xl font-bold text-white md:text-4xl">
             Se torne um <br />
             <em className="not-italic font-extrabold">
@@ -32,11 +32,11 @@ import { use } from "react";
             Seja um Distribuidor <ExternalLink className="ml-2 h-4 w-4" />
           </Button>
         </div>
-        <div className="overflow-hidden rounded-2xl shadow-2xl">
+        <div data-reveal="right" className="reveal-delay-1 overflow-clip rounded-2xl shadow-2xl">
           <img
             src="/handshake.png"
             alt="Aperto de mãos parceria Hero Partes"
-            className="h-85 w-full object-cover"
+            className="parallax-img h-85 w-full object-cover"
             loading="lazy"
             width={800}
             height={600}
