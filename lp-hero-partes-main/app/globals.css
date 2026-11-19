@@ -33,6 +33,13 @@
   }
 }
 
+/* Rolagem suave nos links para seções da página (menu, FAQ). */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-accordion-down,
   .animate-accordion-up {

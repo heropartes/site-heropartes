@@ -253,7 +253,7 @@ export function About() {
         </div>
 
         {/* Redes Sociais */}
-        <div className="mt-10 flex flex-wrap justify-center gap-8">
+        <div id="redes-sociais" className="mt-10 flex scroll-mt-4 flex-wrap justify-center gap-8">
           <a
             href="https://www.instagram.com/heropartes/"
             target="_blank"

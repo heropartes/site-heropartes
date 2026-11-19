@@ -25,7 +25,7 @@ const questions = [
     q: "Como saber se a peça é compatível com meu veículo?",
     a: [
       "Todas as informações de aplicação, como modelos de veículos compatíveis, anos e números originais (OEM), estão descritas em nosso [catálogo de produtos](https://catalogo.heropartes.net/) e nos anúncios das peças. Isso facilita a confirmação da compatibilidade antes da compra.",
-      "Caso ainda tenha dúvidas, entre em contato com nossa equipe informando o número do chassi do veículo, e teremos prazer em ajudar na verificação da aplicação correta.",
+      "Caso ainda tenha dúvidas, [entre em contato com nossa equipe](whatsapp-chassi) informando o número do chassi do veículo, e teremos prazer em ajudar na verificação da aplicação correta.",
     ],
   },
   {
@@ -49,7 +49,7 @@ const questions = [
   {
     q: "A Hero Partes vende diretamente para o consumidor final?",
     a: [
-      "Nossos produtos estão disponíveis para clientes B2C através dos nossos parceiros digitais, e para clientes B2B através do nosso portal on-line, garantindo praticidade, segurança e rapidez na entrega.",
+      "Nossos produtos estão disponíveis para clientes B2C através dos nossos [parceiros digitais](#comprar), e para clientes B2B através do nosso [portal on-line](https://portal.heropartes.com.br/), garantindo praticidade, segurança e rapidez na entrega.",
     ],
   },
   {
@@ -91,19 +91,19 @@ const questions = [
   {
     q: "A Hero Partes atende revendedores e autopeças?",
     a: [
-      "Sim. Temos um portal B2B exclusivo para lojas de autopeças e distribuidores do setor automotivo.",
+      "Sim. Temos um [portal B2B](https://portal.heropartes.com.br/) exclusivo para lojas de autopeças e distribuidores do setor automotivo.",
     ],
   },
   {
     q: "Existe pedido mínimo para compras no atacado?",
     a: [
-      "O pedido mínimo pode variar de acordo com a linha de produtos e as condições comerciais. Nosso time pode orientar sobre as melhores condições para cada caso.",
+      "O pedido mínimo pode variar de acordo com a linha de produtos e as condições comerciais. [Nosso time](#contato) pode orientar sobre as melhores condições para cada caso.",
     ],
   },
   {
     q: "Oficinas mecânicas podem comprar com a Hero Partes?",
     a: [
-      "Sim. Oficinas mecânicas podem encontrar os produtos da Hero Partes com revendedores parceiros autorizados e também nas lojas oficiais da marca em diversos canais digitais, como marketplaces e outras plataformas.",
+      "Sim. Oficinas mecânicas podem encontrar os produtos da Hero Partes com revendedores parceiros autorizados e também nas [lojas oficiais da marca](#comprar) em diversos canais digitais, como marketplaces e outras plataformas.",
     ],
   },
   {
@@ -121,7 +121,7 @@ const questions = [
   {
     q: "Como acompanhar lançamentos e novidades da Hero Partes?",
     a: [
-      "Divulgamos novos produtos, promoções e novidades através das nossas lojas oficiais, redes sociais e catálogo online.",
+      "Divulgamos novos produtos, promoções e novidades através das nossas [lojas oficiais](#comprar), [redes sociais](#redes-sociais) e [catálogo online](https://catalogo.heropartes.net/).",
     ],
   },
   {
@@ -149,30 +149,29 @@ const questions = [
 const WHATSAPP = "(11) 93096-0160";
 const WHATSAPP_URL = "https://wa.me/5511930960160";
 
-// Links escritos nas respostas como [texto](endereço). Endereços com # rolam
-// suavemente até a seção, como o botão de marketplaces do banner.
+// Endereços curtos que as respostas podem usar no lugar do link completo.
+const NAMED_LINKS: Record<string, string> = {
+  "whatsapp-chassi": `${WHATSAPP_URL}?text=${encodeURIComponent(
+    "Olá! Estava no site da Hero Partes e quero confirmar a compatibilidade de uma peça. O chassi do meu veículo é: ",
+  )}`,
+};
+
+// Links escritos nas respostas como [texto](endereço). Endereços com # levam a
+// uma seção da página; a rolagem suave vem do CSS (globals.css).
 const MARKED_LINK = /\[([^\]]+)\]\(([^)]+)\)/g;
 
 function renderAnswer(text: string): ReactNode[] {
   const nodes: ReactNode[] = [];
   let last = 0;
   for (const match of text.matchAll(MARKED_LINK)) {
-    const [whole, label, href] = match;
+    const [whole, label, target] = match;
+    const href = NAMED_LINKS[target] ?? target;
     const i = match.index;
     nodes.push(...linkify(text.slice(last, i), i));
     last = i + whole.length;
     if (href.startsWith("#")) {
       nodes.push(
-        <a
-          key={`l${i}`}
-          href={href}
-          onClick={(e) => {
-            // Ctrl/cmd/shift ou botão do meio seguem o comportamento normal (nova aba).
-            if (e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey) return;
-            e.preventDefault();
-            document.getElementById(href.slice(1))?.scrollIntoView({ behavior: "smooth" });
-          }}
-        >
+        <a key={`l${i}`} href={href}>
           {label}
         </a>,
       );
